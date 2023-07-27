@@ -17,13 +17,15 @@ public class Product {
   private String id;
   private String name;
   private Integer price_in_cents;
+  private Boolean active;
 
   public Product() {
   }
 
-  public Product(RequestProduct requestProduct) {
-    this.name = requestProduct.name();
-    this.price_in_cents = requestProduct.price_in_cents();
+  public Product(RequestProductDTO requestProduct) {
+    this.name = requestProduct.getName();
+    this.price_in_cents = requestProduct.getPrice_in_cents();
+    this.active = true;
   }
 
   public Product(String id, String name, Integer price_in_cents) {
@@ -54,6 +56,14 @@ public class Product {
 
   public void setPrice_in_cents(Integer price_in_cents) {
     this.price_in_cents = price_in_cents;
+  }
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
   }
 
 }
