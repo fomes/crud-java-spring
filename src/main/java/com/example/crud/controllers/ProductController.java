@@ -31,7 +31,7 @@ public class ProductController {
 
   @GetMapping
   public ResponseEntity<List<Product>> getAllProducts() {
-    var allProducts = productRepository.findAll();
+    var allProducts = productRepository.findAllByActiveTrue();
     return new ResponseEntity<>(allProducts, HttpStatus.OK);
   }
 
@@ -63,7 +63,6 @@ public class ProductController {
     if (optionalProduct.isPresent()) {
       Product product = optionalProduct.get();
       product.setActive(false);
-      productRepository.delete(product);
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     } else {
       throw new EntityNotFoundException();
