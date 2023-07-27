@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.crud.domain.product.Product;
-import com.example.crud.domain.product.ProductRepository;
-import com.example.crud.domain.product.RequestProductDTO;
+import com.example.crud.dto.RequestProductDTO;
+import com.example.crud.repositories.ProductRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
