@@ -45,13 +45,13 @@ public class ProductController {
   @PutMapping
   @Transactional
   public ResponseEntity<Product> updateProduct(@RequestBody @Valid RequestProductDTO data) {
-    Optional<Product> optionalProduct = productRepository.findById(data.getId());
-    if (optionalProduct.isPresent()) {
-      Product product = optionalProduct.get();
+    try {
+      Product product = productRepository.findById(data.getId()).get();
       product.setName(data.getName());
       product.setPrice_in_cents(data.getPrice_in_cents());
       return new ResponseEntity<>(product, HttpStatus.OK);
-    } else {
+
+    } catch (Exception e) {
       throw new EntityNotFoundException();
     }
   }
@@ -59,14 +59,15 @@ public class ProductController {
   @DeleteMapping("/{id}")
   @Transactional
   public ResponseEntity<Product> deleteProduct(@PathVariable String id) {
-    Optional<Product> optionalProduct = productRepository.findById(id);
-    if (optionalProduct.isPresent()) {
-      Product product = optionalProduct.get();
+    try {
+      Product product = productRepository.findById(id).get();
       product.setActive(false);
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    } else {
+
+    } catch (Exception e) {
       throw new EntityNotFoundException();
     }
+
   }
 
 }
